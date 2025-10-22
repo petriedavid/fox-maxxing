@@ -48,7 +48,7 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
     }
     .card {
       display: inline-block;
-      background: var(--card-bg, #fff);
+      background: var(--card-bg, lightyellow);
       border-radius: 0px;
       overflow: hidden;
       width: 320px;
@@ -64,7 +64,7 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
       padding: 10px;
     }
     button {
-      background: dodgerblue;
+      background: lightblue;
       color: white;
       border: none;
       padding: 8px 16px;
