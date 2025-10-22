@@ -21,18 +21,9 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
   constructor() {
     super();
     this.title = "";
-    this.t = this.t || {};
-    this.t = {
-      ...this.t,
-      title: "Title",
-    };
-    this.registerLocalization({
-      context: this,
-      localesPath:
-        new URL("./locales/fox-maxxing.ar.json", import.meta.url).href +
-        "/../",
-      locales: ["ar", "es", "hi", "zh"],
-    });
+    this.image = "";
+    this.author = "";
+    ;
   }
 
   // Lit reactive properties
@@ -40,6 +31,8 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
     return {
       ...super.properties,
       title: { type: String },
+      image: { type: String },
+      author: { type: String },
     };
   }
 
@@ -48,28 +41,72 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
     return [super.styles,
     css`
       :host {
-        display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
-      }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
-      }
-      h3 span {
-        font-size: var(--fox-maxxing-label-font-size, var(--ddd-font-size-s));
-      }
+      display: block;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 16px;
+    }
+    .card {
+      display: inline-block;
+      background: var(--card-bg, #fff);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      overflow: hidden;
+      width: 320px;
+      transition: transform 0.2s ease;
+    }
+    .card:hover { transform: scale(1.02); }
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .info {
+      padding: 10px;
+    }
+    button {
+      background: dodgerblue;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0a64c0;
+    }
     `];
   }
 
-  // Lit render the HTML
+  connectedCallback() {
+    super.connectedCallback();
+    this.getNewFox();
+  }
+
+  async newFox() {
+    try {
+      const res = await fetch('https://randomfox.ca/floof/');
+      const data = await res.json();
+      this.image = data.image;
+      this.title = 'Random Fox';
+      this.author = 'randomfox.ca';
+    } catch (err) {
+      console.error('Error fetching fox:', err);
+    }
+  }
+
   render() {
     return html`
-<div class="wrapper">
-  <h3><span>${this.t.title}:</span> ${this.title}</h3>
-  <slot></slot>
-</div>`;
+      <div class="card">
+        <img src="${this.image}" alt="Fox Image" />
+        <div class="info">
+          <h3>${this.title}</h3>
+          <p>Photo from ${this.author}</p>
+          <button @click="${this.newFox}">Next Fox</button>
+        </div>
+      </div>
+ `;
   }
 
   /**
