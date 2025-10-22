@@ -21,7 +21,7 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
   constructor() {
     super();
     this.title = "";
-    this.image = "";
+    this.image = "https://randomfox.ca/floof/";
     this.author = "";
     ;
   }
@@ -49,8 +49,7 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
     .card {
       display: inline-block;
       background: var(--card-bg, #fff);
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      border-radius: 0px;
       overflow: hidden;
       width: 320px;
       transition: transform 0.2s ease;
@@ -89,7 +88,7 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
       const res = await fetch('https://randomfox.ca/floof/');
       const data = await res.json();
       this.image = data.image;
-      this.title = 'become a fox now';
+      this.title = 'fox title';
       this.author = 'randomfox.ca';
     } catch (err) {
       console.error('Error fetching fox:', err);
