@@ -55,7 +55,7 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
       width: 320px;
       transition: transform 0.2s ease;
     }
-    .card:hover { transform: scale(1.02); }
+
     img {
       width: 100%;
       height: auto;
@@ -74,7 +74,7 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
       cursor: pointer;
     }
     button:hover {
-      background: #0a64c0;
+      background: #c0190a;
     }
     `];
   }
@@ -89,7 +89,7 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
       const res = await fetch('https://randomfox.ca/floof/');
       const data = await res.json();
       this.image = data.image;
-      this.title = 'Random Fox';
+      this.title = 'become a fox now';
       this.author = 'randomfox.ca';
     } catch (err) {
       console.error('Error fetching fox:', err);
@@ -99,11 +99,11 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
   render() {
     return html`
       <div class="card">
-        <img src="${this.image}" alt="Fox Image" />
+        <img src="${this.image}" alt="the fox is here" />
         <div class="info">
           <h3>${this.title}</h3>
-          <p>Photo from ${this.author}</p>
-          <button @click="${this.newFox}">Next Fox</button>
+          <p>photo provided by: ${this.author}</p>
+          <button @click="${this.newFox}">want a new fox?</button>
         </div>
       </div>
  `;
