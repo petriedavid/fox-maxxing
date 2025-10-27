@@ -14,6 +14,9 @@ import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
  */
 export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
 
+
+  // tag name for the element
+
   static get tag() {
     return "fox-maxxing";
   }
@@ -78,11 +81,13 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
     `];
   }
 
+  // runs when component mounts to the DOM
   connectedCallback() {
     super.connectedCallback();
-    this.getNewFox();
+    this.newFox();
   }
 
+  // fetches a new random fox from the API
   async newFox() {
     try {
       const res = await fetch('https://randomfox.ca/floof/');
@@ -90,20 +95,39 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
       this.image = data.image;
       this.title = 'fox title';
       this.author = 'randomfox.ca';
+      this.posts = 0;
     } catch (err) {
       console.error('Error fetching fox:', err);
     }
   }
 
+  // jank ai method, makes a new post div and adds it below
+
+  newPost() {
+    const container = this.renderRoot.querySelector('#postcontainer');
+    const post = document.createElement('div');
+    post.class = 'new-post';
+    post.html = `
+      <img src="${this.image}" alt="fox"/>
+      <div class="info">
+        <h3>${this.title}</h3>
+        <p>author: ${this.author}</p>
+      </div>
+    `;
+    container.appendChild(div);
+  }
+
+  // bang see the fox
   render() {
     return html`
       <div class="card">
         <img src="${this.image}" alt="the fox is here" />
         <div class="info">
-          <h3>${this.title}</h3>
-          <p>photo provided by: ${this.author}</p>
-          <button @click="${this.newFox}">want a new fox?</button>
+      
+          <button @click="${this.newPost}">view new post</button>
         </div>
+      <div id="postcontainer"></div>
+
       </div>
  `;
   }
