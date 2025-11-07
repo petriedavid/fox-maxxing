@@ -115,7 +115,7 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
   // loads fox data from local JSON file instead of randomfox API
   async loadFoxData() {
     if (this.foxes.length === 0) {
-      const res = await fetch("fox.json");
+      const res = await fetch("/fox.json");
       const data = await res.json();
       this.foxes = data.foxes;
     }
