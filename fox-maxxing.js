@@ -168,6 +168,10 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
       box-shadow: 0 0 8px rgba(155, 140, 255, 0.4);
     }
 
+    button:focus {
+      color: orange;
+      transform: scale(0.95);
+    }
     /* background grid effect */
     :host::before {
       content: "";
@@ -241,8 +245,8 @@ export class FoxMaxxing extends DDDSuper(I18NMixin(LitElement)) {
               </div>
               <div class="actions">
       <!-- on my life i searched up the emojis on google that was not ai -->
-                <button>Love it! 🧡</button>
-                <button>Hate it. 💀</button>
+                <a href ="#actions"><button>Love it! 🧡</button></a>
+                <a href ="#actions"><button>Hate it. ☠️</button></a>
               </div>
             </div>
           </div>
